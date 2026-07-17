@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikcon Inc. | General Contractor — Los Angeles</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+  :root{
+    --black: #0b0b0c;
+    --charcoal: #16161a;
+    --charcoal-2: #1e1e23;
+    --gold: #c9a227;
+    --gold-bright: #e8c766;
+    --blueprint: #4a7fc9;
+    --paper: #f4f1e8;
+    --paper-dim: #cfcbbd;
+    --line: rgba(244,241,232,0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--black);
+    color:var(--paper);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.04em;
+    font-weight:400;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(11,11,12,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1180px; margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo-mark{ display:flex; align-items:center; gap:12px; }
+  .logo-n{
+    width:36px; height:36px; border-radius:4px;
+    background:linear-gradient(135deg, var(--gold-bright), var(--gold) 45%, #8a6d16);
+    color:var(--black); font-family:'Bebas Neue',sans-serif; font-size:22px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .logo-text{ font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.08em; }
+  .logo-text span{ color:var(--gold); }
+  .nav-links{ display:flex; gap:36px; font-size:14px; letter-spacing:0.03em; }
+  .nav-links a{ opacity:0.8; transition:opacity .2s; }
+  .nav-links a:hover{ opacity:1; color:var(--gold-bright); }
+  .nav-cta{
+    border:1px solid var(--gold); color:var(--gold-bright);
+    padding:9px 18px; font-size:13px; letter-spacing:0.05em;
+    transition:all .2s;
+  }
+  .nav-cta:hover{ background:var(--gold); color:var(--black); }
+  @media (max-width:860px){ .nav-links{ display:none; } }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:90px;
+    background:
+      radial-gradient(ellipse 90% 60% at 80% 20%, rgba(74,127,201,0.10), transparent),
+      radial-gradient(ellipse 60% 50% at 10% 90%, rgba(201,162,39,0.08), transparent),
+      var(--black);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center;
+    width:100%;
+  }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--gold-bright); margin-bottom:22px;
+  }
+  .eyebrow::before{ content:''; width:28px; height:1px; background:var(--gold); }
+
+  .hero h1{
+    font-size:clamp(48px, 8vw, 88px);
+    line-height:0.95;
+    color:var(--paper);
+  }
+  .hero h1 .accent{ color:var(--gold); }
+
+  .hero-sub{
+    font-size:17px; color:var(--paper-dim); max-width:460px;
+    margin:22px 0 34px; line-height:1.6; font-weight:300;
+  }
+
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:44px; }
+  .btn-primary{
+    background:var(--gold); color:var(--black); padding:15px 30px;
+    font-size:14px; letter-spacing:0.04em; font-weight:600;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(201,162,39,0.25); }
+  .btn-ghost{
+    border:1px solid var(--line); color:var(--paper); padding:15px 30px;
+    font-size:14px; letter-spacing:0.04em;
+    transition:border-color .15s;
+  }
+  .btn-ghost:hover{ border-color:var(--gold); }
+
+  .trust-bar{
+    display:flex; gap:32px; flex-wrap:wrap;
+    padding-top:26px; border-top:1px solid var(--line);
+    font-size:13px; color:var(--paper-dim);
+  }
+  .trust-bar strong{ color:var(--paper); font-weight:500; display:block; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:4px; }
+
+  /* Blueprint SVG */
+  .blueprint-wrap{ position:relative; display:flex; align-items:center; justify-content:center; }
+  .blueprint-wrap svg{ width:100%; max-width:480px; height:auto; }
+  .bp-line{
+    fill:none; stroke:var(--blueprint); stroke-width:1.4;
+    stroke-dasharray:2200; stroke-dashoffset:2200;
+    animation:draw 3.5s ease forwards;
+  }
+  .bp-line.delay1{ animation-delay:.3s; }
+  .bp-line.delay2{ animation-delay:.7s; }
+  .bp-dim{ stroke:rgba(74,127,201,0.35); stroke-width:0.6; stroke-dasharray:4 4; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .bp-grid-bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(74,127,201,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,127,201,0.06) 1px, transparent 1px);
+    background-size:36px 36px;
+    mask-image:radial-gradient(ellipse 70% 70% at center, black, transparent);
+  }
+
+  /* SECTION SHELL */
+  section{ padding:120px 0; position:relative; }
+  .section-head{ margin-bottom:60px; max-width:640px; }
+  .section-head .eyebrow{ margin-bottom:16px; }
+  .section-head h2{ font-size:clamp(32px,5vw,52px); }
+
+  /* SERVICES */
+  .services{ background:var(--charcoal); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
+  @media (max-width:800px){ .service-grid{ grid-template-columns:1fr; } }
+  .service-card{
+    background:var(--charcoal); padding:44px 36px;
+    transition:background .25s;
+  }
+  .service-card:hover{ background:var(--charcoal-2); }
+  .service-num{ font-family:'Bebas Neue',sans-serif; color:var(--gold); font-size:14px; letter-spacing:0.1em; }
+  .service-card h3{ font-size:26px; margin:16px 0 12px; }
+  .service-card p{ color:var(--paper-dim); font-size:14.5px; line-height:1.65; font-weight:300; }
+
+  /* GALLERY (label cards, since real project photos aren't in this mockup) */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:900px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+  .gallery-card{
+    aspect-ratio:3/4; border:1px solid var(--line); position:relative; overflow:hidden;
+    display:flex; align-items:flex-end; padding:20px;
+    background:linear-gradient(160deg, var(--charcoal-2), var(--black));
+  }
+  .gallery-card::before{
+    content:''; position:absolute; inset:0;
+    background-image:linear-gradient(rgba(74,127,201,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(74,127,201,0.05) 1px, transparent 1px);
+    background-size:20px 20px;
+  }
+  .gallery-card span{ position:relative; font-size:13px; letter-spacing:0.06em; color:var(--gold-bright); text-transform:uppercase; }
+  .gallery-note{ margin-top:24px; font-size:13px; color:var(--paper-dim); font-style:italic; }
+
+  /* JOIN CREW - the key section */
+  .crew{
+    background:
+      linear-gradient(180deg, var(--black), var(--charcoal) 40%, var(--black));
+    position:relative;
+  }
+  .crew-inner{
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;
+  }
+  @media (max-width:900px){ .crew-inner{ grid-template-columns:1fr; gap:50px; } }
+
+  .trade-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .tag{
+    border:1px solid var(--line); padding:8px 16px; font-size:13px;
+    color:var(--paper-dim); border-radius:2px;
+  }
+
+  .crew-form{
+    background:var(--charcoal); border:1px solid var(--line);
+    padding:38px; border-radius:2px;
+  }
+  .crew-form h3{ font-size:24px; margin-bottom:6px; }
+  .crew-form .form-sub{ color:var(--paper-dim); font-size:13.5px; margin-bottom:26px; font-weight:300;}
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:8px; }
+  .field input, .field select, .field textarea{
+    width:100%; background:var(--black); border:1px solid var(--line);
+    color:var(--paper); padding:12px 14px; font-size:14px; font-family:'Work Sans',sans-serif;
+    border-radius:2px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--gold); }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:520px){ .field-row{ grid-template-columns:1fr; } }
+  .submit-btn{
+    width:100%; background:var(--gold); color:var(--black); border:none;
+    padding:15px; font-size:14px; font-weight:600; letter-spacing:0.05em;
+    cursor:pointer; margin-top:6px; transition:background .2s;
+  }
+  .submit-btn:hover{ background:var(--gold-bright); }
+
+  /* CONTACT / FOOTER */
+  footer{ background:var(--charcoal); border-top:1px solid var(--line); padding:70px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px; margin-bottom:60px; }
+  @media (max-width:800px){ .footer-grid{ grid-template-columns:1fr; gap:36px; } }
+  footer h4{ font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px; }
+  footer p, footer li{ color:var(--paper-dim); font-size:14px; line-height:1.9; font-weight:300; }
+  footer ul{ list-style:none; }
+  .foot-bottom{
+    border-top:1px solid var(--line); padding-top:24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:12.5px; color:var(--paper-dim);
+  }
+
+  .cta-band{
+    background:var(--gold); color:var(--black);
+    padding:60px 0; text-align:center;
+  }
+  .cta-band h2{ font-size:clamp(30px,5vw,46px); margin-bottom:20px; }
+  .cta-band .btn-primary{ background:var(--black); color:var(--gold-bright); display:inline-block; }
+  .cta-band .btn-primary:hover{ box-shadow:0 10px 30px rgba(0,0,0,0.25); }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo-mark">
+      <div class="logo-n">N</div>
+      <div class="logo-text">NIKCON <span>INC.</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#crew">Join Our Crew</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="bp-grid-bg"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Licensed General Contractor · Los Angeles, CA</div>
+      <h1>BUILT FROM<br>THE <span class="accent">GROUND</span> UP.</h1>
+      <p class="hero-sub">Nikcon Inc. delivers residential and commercial construction across Los Angeles — from custom homes to full renovations, led by Edgar Bramasco.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Request a Free Estimate</a>
+        <a href="#crew" class="btn-ghost">Join Our Crew</a>
+      </div>
+      <div class="trust-bar">
+        <div><strong>License</strong>B847567</div>
+        <div><strong>Phone</strong>(562) 282-3153</div>
+        <div><strong>Email</strong>nikconinc.construction@gmail.com</div>
+      </div>
+    </div>
+    <div class="blueprint-wrap">
+      <svg viewBox="0 0 400 380" fill="none">
+        <path class="bp-line" d="M40 220 L200 90 L360 220" />
+        <path class="bp-line delay1" d="M70 220 L70 340 L330 340 L330 220" />
+        <path class="bp-line delay2" d="M170 340 L170 260 L230 260 L230 340" />
+        <path class="bp-dim" d="M40 240 L40 360 M360 240 L360 360" />
+        <path class="bp-dim" d="M110 150 L110 340 M290 150 L290 340" />
+        <path class="bp-line delay2" d="M150 200 L150 240 M180 200 L180 240 M220 200 L220 240 M250 200 L250 240" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What We Build</div>
+      <h2>Residential & Commercial, Start to Finish.</h2>
+    </div>
+  </div>
+  <div class="service-grid">
+    <div class="service-card">
+      <div class="service-num">RESIDENTIAL</div>
+      <h3>Custom Homes</h3>
+      <p>Ground-up custom builds designed and constructed to your vision, from foundation to final walkthrough.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">RENOVATION</div>
+      <h3>Remodels & Additions</h3>
+      <p>Kitchen, bath, and whole-home renovations, plus room additions that fit seamlessly into your existing home.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">COMMERCIAL</div>
+      <h3>Commercial Builds</h3>
+      <p>Tenant improvements and commercial construction managed with the same craftsmanship as our residential work.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Our Work</div>
+      <h2>Recent Projects</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-card"><span>Custom Estate — Los Angeles</span></div>
+      <div class="gallery-card"><span>Full Home Renovation</span></div>
+      <div class="gallery-card"><span>Pool & Outdoor Living</span></div>
+      <div class="gallery-card"><span>Iron Gate & Entry Detail</span></div>
+    </div>
+    <p class="gallery-note">Swap these placeholders for real photos from your project galleries — the pool house, the iron gate entry, and the full estate build all work great here.</p>
+  </div>
+</section>
+
+<section class="crew" id="crew">
+  <div class="wrap crew-inner">
+    <div>
+      <div class="eyebrow">Building Our Team</div>
+      <h2 style="font-size:clamp(32px,5vw,48px);">Stop Posting.<br>Start Building Your Bench.</h2>
+      <p style="color:var(--paper-dim); font-weight:300; line-height:1.7; margin-top:20px; max-width:440px;">
+        Every trade you need — in one place, applying directly to Nikcon. No more digging through Facebook comments for the next painter or tile sub.
+      </p>
+      <div class="trade-tags">
+        <div class="tag">Painters</div>
+        <div class="tag">Tile Contractors</div>
+        <div class="tag">Demo Crews</div>
+        <div class="tag">Hand Rail / Iron Work</div>
+        <div class="tag">Electricians</div>
+        <div class="tag">Framing</div>
+        <div class="tag">General Labor</div>
+      </div>
+    </div>
+
+    <div class="crew-form">
+      <h3>Apply to Work With Nikcon</h3>
+      <p class="form-sub">Tell us your trade and we'll reach out for the next job that fits.</p>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" placeholder="Jane Rivera">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" placeholder="(555) 000-0000">
+        </div>
+        <div class="field">
+          <label>Trade</label>
+          <select>
+            <option>Painter</option>
+            <option>Tile Contractor</option>
+            <option>Demo Crew</option>
+            <option>Iron / Hand Rail</option>
+            <option>Electrician</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>License # (if applicable)</label>
+        <input type="text" placeholder="Optional">
+      </div>
+      <div class="field">
+        <label>Notes</label>
+        <textarea rows="3" placeholder="Years of experience, availability, past projects..."></textarea>
+      </div>
+      <button class="submit-btn">Submit Application</button>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Have a project in mind?</h2>
+    <a href="#contact" class="btn-primary">Request a Free Estimate</a>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo-mark" style="margin-bottom:16px;">
+          <div class="logo-n">N</div>
+          <div class="logo-text">NIKCON <span>INC.</span></div>
+        </div>
+        <p>Licensed general contractor specializing in residential and commercial construction across Los Angeles. Built from the ground up.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Edgar Bramasco</li>
+          <li>(562) 282-3153</li>
+          <li>nikconinc.construction@gmail.com</li>
+          <li>Los Angeles, CA</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#crew">Join Our Crew</a></li>
+          <li>License #B847567</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Nikcon Inc. All rights reserved.</div>
+      <div>Licensed & Insured — CA License #B847567</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
